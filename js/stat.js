@@ -1,20 +1,15 @@
 'use strict';
 
-function searchMaxValue(array) {
-  for (var i = 0; i <= array.length - 2; i++) {
-    var maxValue = array[i];
-
-    for (var j = i + 1; j <= array.length - 1; j++) {
-      if (array[j] > maxValue) {
-        maxValue = array[j];
-        var swap = array[i];
-        array[i] = maxValue;
-        array[j] = swap;
-      }
+var searchMaxValue = function (array) {
+  var max = -1;
+  for (var i = 0; i < array.length; i++) {
+    var time = array[i];
+    if (time > max) {
+      max = time;
     }
   }
-  return maxValue;
-}
+  return max;
+};
 
 function getRandomColor() {
   return 'rgba(0, 79, 186,' + (Math.random() * (1 - 0.1) + 0.1) + ')';
