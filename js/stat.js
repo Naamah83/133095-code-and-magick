@@ -16,25 +16,28 @@ function searchMaxValue(array) {
   return maxValue;
 }
 
-function drawRandomColor() {
-  return 'rgba(0, 79, 186,' + Math.random() + ')';
+function getRandomColor() {
+  return 'rgba(0, 79, 186,' + (Math.random() * (1 - 0.1) + 0.1) + ')';
 }
 
 // Функция отрисовки гистограммы
+var histogramWidth = 40;
+var histogramHeigth = 150;
+var indent = 50;
+var initialX = 160;
+var initialY = 100;
+
+// Функция отрисовки гистограммы
 function drawHistogram(i, ctx, names, times) {
-  var histogramWidth = 40;
-  var histogramHeigth = 150;
-  var indent = 50;
-  var initialX = 150;
-  var initialY = 90;
+
   var step = histogramHeigth / searchMaxValue(times);
+  var floatX = initialX + (histogramWidth + indent) * i;
 
-  ctx.fillStyle = (names[i] === 'Вы') ? 'rgba(255, 0, 42, 1)' : drawRandomColor();
-
-  ctx.fillRect(initialX + (histogramWidth + indent) * i, (initialY + histogramHeigth) - (times[i] * step), histogramWidth, times[i] * step);
+  ctx.fillStyle = (names[i] === 'Вы') ? 'rgba(255, 0, 42, 1)' : getRandomColor();
+  ctx.fillRect(floatX, (initialY + histogramHeigth) - (times[i] * step), histogramWidth, times[i] * step);
   ctx.fillStyle = '#000';
-  ctx.fillText(Math.round(times[i]), initialX + (histogramWidth + indent) * i, (initialY + histogramHeigth) - times[i] * step - 20 / 2);
-  ctx.fillText(names[i], initialX + (histogramWidth + indent) * i, initialY + histogramHeigth + 20);
+  ctx.fillText(Math.round(times[i]), floatX, (initialY + histogramHeigth) - times[i] * step - 20 / 2);
+  ctx.fillText(names[i], floatX, initialY + histogramHeigth + 20);
 }
 
 window.renderStatistics = function (ctx, names, times) {
