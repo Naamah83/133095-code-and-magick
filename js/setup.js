@@ -26,8 +26,7 @@ var generateParameters = function () {
 var getWizardsArray = function () {
   var wizards = [];
   for (var i = 0; i < 4; i++) {
-    var wizard = generateParameters();
-    wizards.push(wizard);
+    wizards.push(generateParameters());
   }
   return wizards;
 };
