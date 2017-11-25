@@ -16,19 +16,23 @@ var getRandomValue = function (array) {
 };
 
 var generateParameters = function () {
-  var wizardParameters = [];
-  for (var i = 0; i < 4; i++) {
-    var wizards = {
-      name: WIZARD_NAMES[getRandomValue(WIZARD_NAMES)] + ' ' + WIZARD_SURNAMES[getRandomValue(WIZARD_SURNAMES)],
-      coatColor: WIZARD_COAT[getRandomValue(WIZARD_COAT)],
-      eyesColor: WIZARD_EYES[getRandomValue(WIZARD_EYES)]
-    };
-    wizardParameters.push(wizards);
-  }
-  return wizardParameters;
+  return {
+    name: WIZARD_NAMES[getRandomValue(WIZARD_NAMES)] + ' ' + WIZARD_SURNAMES[getRandomValue(WIZARD_SURNAMES)],
+    coatColor: WIZARD_COAT[getRandomValue(WIZARD_COAT)],
+    eyesColor: WIZARD_EYES[getRandomValue(WIZARD_EYES)]
+  };
 };
 
-var wizardParameters = generateParameters();
+var showWizards = function () {
+  var wizards = [];
+  for (var i = 0; i < 4; i++) {
+    var wizard = generateParameters();
+    wizards.push(wizard);
+  }
+  return wizards;
+};
+
+var wizards = showWizards();
 
 var createNewWizard = function (wizard) {
   var newWizard = similarWizardTemplate.cloneNode(true);
@@ -39,8 +43,8 @@ var createNewWizard = function (wizard) {
 };
 
 var fragment = document.createDocumentFragment();
-for (var i = 0; i < wizardParameters.length; i++) {
-  fragment.appendChild(createNewWizard(wizardParameters[i]));
+for (var i = 0; i < wizards.length; i++) {
+  fragment.appendChild(createNewWizard(wizards[i]));
 }
 
 similarListElement.appendChild(fragment);
