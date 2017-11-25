@@ -23,7 +23,7 @@ var generateParameters = function () {
   };
 };
 
-var showWizards = function () {
+var getWizardsArray = function () {
   var wizards = [];
   for (var i = 0; i < 4; i++) {
     var wizard = generateParameters();
@@ -32,7 +32,7 @@ var showWizards = function () {
   return wizards;
 };
 
-var wizards = showWizards();
+var wizards = getWizardsArray();
 
 var createNewWizard = function (wizard) {
   var newWizard = similarWizardTemplate.cloneNode(true);
